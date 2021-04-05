@@ -101,7 +101,7 @@ INSERT INTO score VALUES(100, 100, 100);
     
 -- 다음데이터를 삽입한다.
 -- 80, 80, 80, james bond
-INSERT INTO score(kor, eng, mat, name) VALUES (80, 80, 80, 'james bond');
+    INSERT INTO score(kor, eng, mat, name) VALUES (80, 80, 80, 'james bond');
 
 -- 아래와 같이 출력한다.
 --first_name      last_name
@@ -112,7 +112,77 @@ INSERT INTO score(kor, eng, mat, name) VALUES (80, 80, 80, 'james bond');
     FROM score WHERE kor = 80;
     
     
+-- 3. 숫자함수
+
+--테이블을 사용하지 않는 SELECT문에서는 DUAL 테이블을 사용합니다. 실제로 DUAL테이블을 쓰겠다는건 아니고
+--테이블의 형태는 갖추고 있는데 테이블을 아니다... 테이블의 뭔가를 빼다 쓰려는게 아니고
+--FROM 절을 생략할수 없는 오라클 특성때문에 FROM DUAL을 해준다.
+    DESC DUAL;
+    SELECT DUMMY FROM DUAL;
+
+
+--1) 반올림 함수
+-- ROUND (값, 자릿수) FROM DUAL;
+    SELECT ROUND(123.4567, 1) FROM DUAL;  -- 소수 자릿수 1자리로 반올림하겠다 --> 123.5
+    SELECT ROUND(123.4567, 2) FROM DUAL;  -- 소수 자릿수 2자리로 반올림하겠다 --> 123.46
+    SELECT ROUND(123.4567, 0) FROM DUAL;  -- 정수로 반올림                    --> 123
+    SELECT ROUND(123.4567) FROM DUAL;     -- 정수로 반올림                    --> 123
+    SELECT ROUND(123.4567, -1) FROM DUAL; -- 10의 자리로 반올림               --> 120
+    SELECT ROUND(123.4567, -2) FROM DUAL; -- 100의 자리로 반올림              --> 100
+
+
+--2) 올림 함수
+-- CEIL(값) : 정수로 올림(ceiling 천장)
+-- 자릿수 조정을 계산을 통해서 처리합니다.
+    SELECT CEIL(123.4567) FROM DUAL;    --> 124
+    --(1)소수 자릿수 2자리로 올림
+    --    과정 =>>  100을 곱한다. ---> CEIL()처리한다. ---> 100으로 나눈다.
+    SELECT CEIL(123.4567 * 100)/100 FROM DUAL;  --> 123.46
     
+    --(2)소수 자릿수 1자리로 올림
+    --    과정 =>>  10을 곱한다. ---> CEIL()처리한다. ---> 10으로 나눈다.
+    SELECT CEIL(123.4567 * 10)/100 FROM DUAL;  --> 123.46
+
+    --(3)10의 자리로 올림
+    --    과정 =>>  10의 -1제곱(0.1) ---> CEIL()처리한다. ---> 10의 -1제곱(0.1)으로 나눈다.
+    SELECT CEIL(123.4567 * 0.1)/0.1 FROM DUAL;    -->130
+    
+    --(4)100의 자리로 올림
+    --    과정 =>>  10의 -2제곱(0.01) ---> CEIL()처리한다. ---> 10의 -2제곱(0.01)으로 나눈다.
+    SELECT CEIL(123.4567 * .01)/.01 FROM DUAL;  --> 200
+    
+    
+--3) 내림 함수
+-- FLOOR(값) : 정수로 내림(floor 바닥)
+-- CEIL()와 같은 방식으로 사용합니다.
+    SELECT FLOOR(567.8989 * 100)/ 100 FROM DUAL;     --> 567.89
+    SELECT FLOOR(567.8989 * 10)/ 10 FROM DUAL;       --> 567.8
+    SELECT FLOOR(567.8989 * 1)/ 1 FROM DUAL;         --> 567
+    SELECT FLOOR(567.8989 * .1)/.1 FROM DUAL;        --> 560
+    SELECT FLOOR(567.8989 * 0.01)/ 0.01 FROM DUAL;   --> 500
+    SELECT FLOOR(567.8989 * 0.001)/ 0.001 FROM DUAL; --> 0
+    
+   
+--4) 절사 함수(TRUNCATE)
+-- TRUNC (값, 자릿수) FROM DUAL;
+    SELECT TRUNC(567.8989, 2)  FROM DUAL; --> 567.89
+    SELECT TRUNC(567.8989, 1)  FROM DUAL; --> 567.8
+    SELECT TRUNC(567.8989, 0)  FROM DUAL; --> 567
+    SELECT TRUNC(567.8989)     FROM DUAL; --> 567
+    SELECT TRUNC(567.8989, -1) FROM DUAL; --> 560
+    SELECT TRUNC(567.8989, -2) FROM DUAL; --> 500
+
+        -- 내림과 절사의 차이점
+        -- 음수에서 차이가 발생한다.
+            SELECT FLOOR(-1.5)FROM DUAL;    --1.5보다 작은 정수       --> -2
+            SELECT TRUNC(-1.5, 0)FROM DUAL; --1.5에서 정수로 자름     --> -1
+
+-- 4. 날짜 함수
+
+
+
+
+-- 5. 형 변환 함수
     
     
     
