@@ -259,7 +259,7 @@ INSERT INTO score VALUES(100, 100, 100);
     SELECT TO_DATE('2021-04-01'),
            TO_DATE('2021/04/01'),
            TO_DATE('21-04-01'),
-           TO_DATE('21/04/01'),
+           TO_DATE('21/04/01'),     --기본타입
            
            -- 형식을 주자
            TO_DATE('2021/01/04', 'YYYY/DD/MM'),
