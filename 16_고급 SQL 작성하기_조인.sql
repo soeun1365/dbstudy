@@ -150,5 +150,43 @@ SELECT
     ON D.DEPT_NO = E.DEPART
  GROUP BY D.DEPT_NO;
 
+--리뷰1. 모든 사원들의 NAME, DEPT_NAME을 조회하시오. (부서가 없는 사원은 조회하지 마시오.)
+SELECT E.NAME
+     , D.DEPT_NAME
+  FROM DEPARTMENT D, EMPLOYEE E
+ WHERE D.DEPT_NO = E.DEPART;    -- 부서가 없는 사원 조회 안하는것을 INNER JOIN사용
+ 
+--위와 같은 쿼리
+SELECT E.NAME
+     , D.DEPT_NAME
+  FROM DEPARTMENT D INNER JOIN EMPLOYEE E
+    ON D.DEPT_NO = E.DEPART;    -- 부서가 없는 사원 조회 안하는것을 INNER JOIN사용
 
+--리뷰2. '서울'에서 근무하는 사원들의 EMP_NO, NAME을 조회하시오.
+SELECT E.EMP_NO
+     , E.NAME
+  FROM DEPARTMENT D, EMPLOYEE E
+ WHERE D.DEPT_NO = E.DEPART
+   AND D.LOCATION = '서울';
 
+--위와 같은 쿼리
+SELECT E.EMP_NO
+     , E.NAME
+  FROM DEPARTMENT D INNER JOIN EMPLOYEE E
+    ON D.DEPT_NO = E.DEPART
+ WHERE D.LOCATION = '서울';
+
+--리뷰3. 모든 사원의 EMP_NO, NAME, DEPT_NAME을 조회하시오. (부서가 없는 사원도 조회하시오.)
+--일치하는 부서번호가 없는 김미나도 출력하기 위해서, 오른쪽 외부 조인으로 처리한다.
+SELECT E.EMP_NO
+     , E.NAME
+     , D.DEPT_NAME
+  FROM DEPARTMENT D RIGHT JOIN EMPLOYEE E
+    ON D.DEPT_NO = E.DEPART;
+    
+SELECT E.EMP_NO
+     , E.NAME
+     , D.DEPT_NAME
+  FROM DEPARTMENT D , EMPLOYEE E
+ WHERE D.DEPT_NO(+) = E.DEPART;     --(+)가 있는 테이블은 일치하는 정보만 조회, (+)가 없는 테이블은 전체 조회
+                                    --현재 오른쪽이 중심으로 조인이 발생함 --> 오른쪽 외부 조인
