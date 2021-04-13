@@ -27,16 +27,16 @@ EXEC PROC2();
 -- 3) 입력파라미터
 -- 프로시져에 전달하는 값: 인수처리 방법
 -- 문제 : IMPLOYEE_ID를 입력 파라미터로 전달하면 해당 사원의 LAST_NAME 출력하기
-                CREATE OR REPLACE PROCEDURE PROC3(IN_EMPLOYEE_ID IN NUMBER) -- 타입 작성 시 크기 지정 안 함(NUMBER, VARCAHR2 등)
-                IS  
-                    V_LAST_NAME EMPLOYEES.LAST_NAME%TYPE;
-                BEGIN
-                    SELECT LAST_NAME INTO V_LAST_NAME
-                      FROM EMPLOYEES
-                     WHERE EMPLOYEE_ID = IN_EMPLOYEE_ID;
-                    DBMS_OUTPUT.PUT_LINE('결과: ' || V_LAST_NAME);
-                END PROC3;
-                EXEC PROC3(100); --입력 파라미터 100 전달
+CREATE OR REPLACE PROCEDURE PROC3(IN_EMPLOYEE_ID IN NUMBER) -- 타입 작성 시 크기 지정 안 함(NUMBER, VARCAHR2 등)
+IS  
+    V_LAST_NAME EMPLOYEES.LAST_NAME%TYPE;
+BEGIN
+    SELECT LAST_NAME INTO V_LAST_NAME
+      FROM EMPLOYEES
+     WHERE EMPLOYEE_ID = IN_EMPLOYEE_ID;
+    DBMS_OUTPUT.PUT_LINE('결과: ' || V_LAST_NAME);
+END PROC3;
+EXEC PROC3(100); --입력 파라미터 100 전달
 
 -- 4) 출력파라미터
 -- 프로시저의 실행 결과를 저장하는 파라미터
