@@ -146,6 +146,13 @@ SELECT
 -- 나 : ME
 -- 너 : YOU
 
+select
+       
+
+
+
+
+
 SELECT 
        ME.DEPARTMENT_ID AS 부서번호
      , ME.FIRST_NAME || ' ' || ME.LAST_NAME AS 내이름

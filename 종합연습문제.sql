@@ -102,8 +102,7 @@ SELECT
   FROM USERS
  WHERE USER_MOBILE2 LIKE '5%';
  
--- 8. 구매 이력이 있는 사용자들의 이름, 제품명, 제품가격, 구매수량을 조회하시오.
--- 서로 다른 테이블에서 조회해야하므로 조인
+
 -- 구매이력이있다 --> 내부조인
 SELECT
        U.USER_NAME AS 이름

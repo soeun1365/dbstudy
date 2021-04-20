@@ -140,7 +140,7 @@ SELECT
  WHERE DEPARTMENT_ID = 30
    AND SALARY > (SELECT MAX(SALARY)
                    FROM EMPLOYEES
-                  WHERE DEPARTMENT_ID = 50);
+                  WHERE DEPARTMENT_ID = 30);
                 
  -- 위와 같은 쿼리                                 
 SELECT
@@ -150,7 +150,7 @@ SELECT
  WHERE DEPARTMENT_ID = 30
    AND SALARY > ALL (SELECT SALARY
                        FROM EMPLOYEES
-                      WHERE DEPARTMENT_ID = 50);
+                      WHERE DEPARTMENT_ID = 30);
               
 -- 12. MANAGER가 아닌 사원들의 정보를 조회하시오.
 -- MANAGER는 MANAGER_ID를 가지고 있다.
@@ -208,7 +208,7 @@ SELECT
   FROM EMPLOYEES
  WHERE DEPARTMENT_ID IS NOT NULL
  GROUP BY DEPARTMENT_ID
-HAVING COUNT(*) = (SELECT MAX(COUNT (*))
+HAVING COUNT(*) = (SELECT MAX(COUNT(*))
                      FROM EMPLOYEES
                     GROUP BY DEPARTMENT_ID);
   
